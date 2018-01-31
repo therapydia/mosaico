@@ -1,5 +1,6 @@
-@import "therapydia_colors";
 @import 'app_standalone.less';
+@import "mixins";
+@import "therapydia_colors";
 
 @accent-color: @healthy-blue;
 @background-color: @magazine-grey;
@@ -104,7 +105,7 @@
   }
 
   li@{activeclass} a {
-    & when(@buttonstyle) {
+    & when (@buttonstyle) {
       background-color: transparent;
       color: @button-text-color;
       border-bottom: 3px solid @button-text-color;
@@ -140,7 +141,6 @@
     }
   }
 
-
   .objEdit .propInput input[type=checkbox] {
     &:checked + .checkbox-replacer:before {
       margin-left: 20px;
@@ -173,7 +173,8 @@
   }
 
 }
-.mo .objEdit input[type=checkbox]+.checkbox-replacer:before {
+
+.mo .objEdit input[type=checkbox] + .checkbox-replacer:before {
   color: @button-background-color;
 }
 
@@ -181,18 +182,22 @@
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
+
 .mo .propInput .data-select:after {
   background-color: transparent;
   color: lighten(@text-color, 30%);
 }
+
 .mo .propInput .evo-pointer:before {
   background-color: white;
   color: lighten(@text-color, 30%);
 }
+
 .mo .propInput .data-integer .ui-spinner-button .ui-button-text {
   background-color: transparent;
   color: lighten(@text-color, 30%);
 }
+
 .mo .propInput .data-select:hover:after,
 .mo .propInput .evo-pointer:hover:before,
 .mo .ui-button.ui-spinner-button.ui-state-hover,
@@ -258,6 +263,7 @@
     }
   }
 }
+
 #main-toolbox {
   .noSelectedBlock, .customStyleHelp, .objEmpty, .galleryEmpty {
     font-size: 1em;
@@ -270,9 +276,7 @@
   }
 }
 
-
-
-& when(true) {
+& when (true) {
   .mo .objEdit.level1 {
     background-color: white;
     box-shadow: 1px 1px 3px #888;
@@ -293,7 +297,7 @@
 
   .mo .objPreview {
     border-width: 0;
-    box-shadow: inset 1px 1px 4px rgba(0,0,0,.3);
+    box-shadow: inset 1px 1px 4px rgba(0, 0, 0, .3);
     top: 4px;
     left: 4px;
   }
@@ -381,5 +385,43 @@
   color: @button-text-color;
   .ui-icon {
     color: @button-text-color;
+  }
+}
+
+.moxman-window-head, .mce-window-head {
+  .moxman-title, .mce-title {
+    color: white !important;
+  }
+}
+
+.mce-panel.mce-foot {
+
+  .mce-btn {
+    border: none;
+
+    button {
+      .therapydia-button;
+      .therapydia-button--short;
+      .therapydia-button--grey;
+    }
+
+    &.mce-primary button {
+      .therapydia-button--blue;
+    }
+  }
+}
+
+.mce-listbox {
+  border: 1px solid #c5c5c5 !important;
+}
+
+.mce-menu-item {
+
+  &.mce-active {
+    background-color: @healthy-blue-light !important;
+  }
+
+  &:hover {
+    background-color: @healthy-blue !important;
   }
 }
