@@ -2,11 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=1024, initial-scale=1">
-
-    <link rel="canonical" href="http://mosaico.io"/>
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
-    <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+    <meta name="viewport" content="width=900, initial-scale=1">
 
     <script src="dist/vendor/jquery.min.js"></script>
     <script src="dist/vendor/knockout.js"></script>
@@ -29,24 +25,20 @@
           alert('Update your browser!');
           return;
         }
-        // var basePath = window.location.href.substr(0, window.location.href.lastIndexOf('/')).substr(window.location.href.indexOf('/','https://'.length));
-        var basePath = window.location.href;
-        if (basePath.lastIndexOf('#') > 0) basePath = basePath.substr(0, basePath.lastIndexOf('#'));
-        if (basePath.lastIndexOf('?') > 0) basePath = basePath.substr(0, basePath.lastIndexOf('?'));
-        if (basePath.lastIndexOf('/') > 0) basePath = basePath.substr(0, basePath.lastIndexOf('/'));
         var plugins = [function(vm) {
           window.viewModel = vm;
+        }, function(viewModel) {
+          viewModel.templateVariables = function() {
+            return [];
+          };
         }];
-        // A basic plugin that expose the "viewModel" object as a global variable.
-        // plugins = [function(vm) {window.viewModel = vm;}];
+
         var ok = Mosaico.init({
-          imgProcessorBackend:   basePath + '/img/',
-          emailProcessorBackend: basePath + '/dl/',
-          titleToken:            'MOSAICO Responsive Email Designer',
+          imgProcessorBackend:   '/img',
+          emailProcessorBackend: '/dl',
           template:              '/templates/versafix-1/template-versafix-1.html',
           fileuploadConfig:      {
-            url: basePath + '/upload/'
-            // messages??
+            url: '/upload'
           }
         }, plugins);
         if (!ok) {

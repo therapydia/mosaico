@@ -2,6 +2,10 @@
 @import "mixins";
 @import "therapydia_colors";
 
+@font-face {
+  font-family: "nexa_black_italic";
+}
+
 @accent-color: @healthy-blue;
 @background-color: @magazine-grey;
 @link-color: @healthy-blue;
@@ -13,19 +17,39 @@
 @large-balloon-border-radius: 2px;
 
 @object-background-color: #DDDDDD;
-// @mosaico-object-shadow: 1px 1px 2px lighten(@shadow-color, 30%);
 
 @input-background-color: white;
 @input-border-color: lighten(@text-color, 20%);
 
 @mosaico-selection-color: @link-color;
 
-#main-preview #preview-toolbar {
-  padding: 1px 5px;
+#main-preview {
+  border-left: solid @accent-color 5px;
+
+  #preview-toolbar {
+    padding: 1px 5px;
+    width: 100%;
+    background-color: @accent-color;
+  }
 }
 
 #toolbar {
   padding: 1px 5px;
+}
+
+#tooltabs {
+  font-family: "Arial", Arial, sans-serif !important;
+  color: #6d6868 !important;
+}
+
+.objLabel.level0, .objLabel.level1, .objLabel.level2, .objLabel.level3 {
+  font-family: "nexa_black_italic", sans-serif !important;
+}
+
+.mo .objPreview > div {
+  position: absolute;
+  bottom: 35%;
+  left: 10%;
 }
 
 @button-background-color: @link-color;
@@ -118,7 +142,6 @@
     &:checked + .checkbox-replacer:after,
     & + .checkbox-replacer:before {
       border-radius: 50%;
-      // padding: 5px;
       box-shadow: 1px 1px 2px @shadow-color;
     }
 
@@ -127,7 +150,6 @@
       border-radius: 30px;
       background-color: lighten(@button-background-color, 20%);
       color: @button-text-color;
-      // margin: 0 -2px;
     }
     & + .checkbox-replacer:after {
       padding-left: 15px;
@@ -213,7 +235,6 @@
 
 .mo .ui-button.ui-spinner-button {
   background-color: transparent;
-  // color: lighten(@text-color, 30%);
   .ui-button-text .ui-icon {
     color: lighten(@text-color, 30%);
   }
@@ -281,8 +302,7 @@
     background-color: white;
     box-shadow: 1px 1px 3px #888;
     border-top: 0;
-    padding: 6px;
-    padding-top: .5em;
+    padding: .5em 6px 6px;
   }
 
   .mo #toolstyles, .mo #tooltheme {
@@ -337,7 +357,6 @@
     }
   }
 
-  /* evo color specific changes for material-like look */
   .mo .evo-pop {
     min-width: 250px;
 
@@ -373,7 +392,6 @@
 
   }
 
-  // file manager broser button
   .mo .propInput .ui-textbutton .ui-textbutton-button {
     border-radius: 50%;
     box-shadow: 1px 1px 3px @shadow-color;
@@ -423,5 +441,11 @@
 
   &:hover {
     background-color: @healthy-blue !important;
+  }
+}
+
+@media (max-width: (@screen-lg-max) ) {
+  label[for=previewFrameToggle] {
+    display: inline-block !important;
   }
 }
