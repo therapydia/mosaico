@@ -163,6 +163,53 @@ ko.bindingHandlers.wysiwygImg = {
 };
 ko.virtualElements.allowedBindings['wysiwygImg'] = true;
 
+var TEXT_COLORS = [
+  'f5f5f5', 'Hospital Grey',
+  '0098ce', 'Healthy Blue',
+  '55b354', 'Health Green',
+  'fba50d', 'Energy Orange',
+  '777777', 'Plastic Grey',
+  '000000', 'Black',
+  '993300', 'Burnt orange',
+  '333300', 'Dark olive',
+  '003300', 'Dark green',
+  '003366', 'Dark azure',
+  '000080', 'Navy Blue',
+  '333399', 'Indigo',
+  '333333', 'Very dark gray',
+  '800000', 'Maroon',
+  'FF6600', 'Orange',
+  '808000', 'Olive',
+  '008000', 'Green',
+  '008080', 'Teal',
+  '0000FF', 'Blue',
+  '666699', 'Grayish blue',
+  '808080', 'Gray',
+  'FF0000', 'Red',
+  'FF9900', 'Amber',
+  '99CC00', 'Yellow green',
+  '339966', 'Sea green',
+  '33CCCC', 'Turquoise',
+  '3366FF', 'Royal blue',
+  '800080', 'Purple',
+  '999999', 'Medium gray',
+  'FF00FF', 'Magenta',
+  'FFCC00', 'Gold',
+  'FFFF00', 'Yellow',
+  '00FF00', 'Lime',
+  '00FFFF', 'Aqua',
+  '00CCFF', 'Sky blue',
+  '993366', 'Red violet',
+  'FFFFFF', 'White',
+  'FF99CC', 'Pink',
+  'FFCC99', 'Peach',
+  'FFFF99', 'Light yellow',
+  'CCFFCC', 'Pale green',
+  'CCFFFF', 'Pale cyan',
+  '99CCFF', 'Light sky blue',
+  'CC99FF', 'Plum'
+];
+
 // NOTE: there are issues with the "raw" format and trash left around by tinymce workarounds for contenteditable issues.
 // setting "forced_root_block: false" disable the default behaviour of adding a wrapper <p> when needed and this seems to fix many issues in IE.
 // also, maybe we should use the "raw" only for the "before SetContent" and instead read the "non-raw" content (the raw content sometimes have data- attributes and too many ending <br> in the code)
@@ -170,10 +217,10 @@ ko.bindingHandlers.wysiwyg = {
   currentIndex: 0,
   standardOptions: {},
   fullOptions: {
-    toolbar1: 'bold italic forecolor backcolor hr styleselect removeformat | link unlink | pastetext code',
+    toolbar1: 'addvariable bold italic forecolor backcolor hr | link unlink | pastetext code',
     //toolbar1: "bold italic | forecolor backcolor | link unlink | hr | pastetext code", // | newsletter_profile newsletter_optlink newsletter_unsubscribe newsletter_showlink";
-    //toolbar2: "formatselect fontselect fontsizeselect | alignleft aligncenter alignright alignjustify | bullist numlist",
-    plugins: ["link hr paste lists textcolor code"],
+    toolbar2: "formatselect fontselect fontsizeselect | alignleft aligncenter alignright alignjustify | bullist numlist",
+    plugins: ["link hr paste lists textcolor"],
     // valid_elements: 'strong/b,em/i,*[*]',
     // extended_valid_elements: 'strong/b,em/i,*[*]',
     // Removed: image fullscreen contextmenu 
@@ -210,7 +257,7 @@ ko.bindingHandlers.wysiwyg = {
       // maybe not needed, but won't hurt.
       hidden_input: false,
       plugins: ["paste"],
-      toolbar1: "bold italic",
+      toolbar1: "addvariable bold italic",
       toolbar2: "",
       // we have to disable preview_styles otherwise tinymce push inline every style he things will be applied and this makes the style menu to inherit color/font-family and more.
       preview_styles: false,
@@ -219,6 +266,7 @@ ko.bindingHandlers.wysiwyg = {
       schema: "html5",
       extended_valid_elements: 'strong/b,em/i,*[*]',
       menubar: false,
+      textcolor_map: TEXT_COLORS,
       skin: 'gray-flat',
       setup: function(editor) {
         // TODO change sometimes doesn't trigger (we have to document when)
@@ -256,6 +304,36 @@ ko.bindingHandlers.wysiwyg = {
           });
         }
         */
+        var btn;
+        var variables = global.viewModel.templateVariables();
+        editor.addButton('addvariable', {
+          type:         'menubutton',
+          text:         'Add Variable',
+          icon:         false,
+          menu:         variables.map(function(variable) {
+            return {
+              text:    variable.text,
+              onclick: function() {
+                editor.insertContent('{{' + variable.value + '}}');
+              }
+            };
+          }),
+          onpostrender: function() {
+            btn = this;
+          }
+        });
+        var SET_VARIABLES = 'setVariables';
+
+        editor.addCommand(SET_VARIABLES, function(_ui, variables) {
+          btn.state.set('menu', variables.map(function(variable) {
+            return {
+              text:    variable.text,
+              onclick: function() {
+                editor.insertContent('{{' + variable.value + '}}');
+              }
+            };
+          }));
+        });
 
         thisEditor = editor;
 
