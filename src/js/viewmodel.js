@@ -454,6 +454,13 @@ function initializeEditor(content, blockDefs, thumbPathConverter, galleryUrl) {
 
     ko.cleanNode(frameEl);
 
+    // images appear blank after exporting, this reloads them
+    $('#main-edit-area').find('.selectable-img img').each(function(_index, img) {
+      var previousSrc = img.src;
+      img.src         = '';
+      img.src         = previousSrc;
+    });
+
     if (viewModel.inline) viewModel.inline(frameEl.contentWindow.document);
 
     // Obsolete method didn't work on IE11 when using "HTML5 doctype":
