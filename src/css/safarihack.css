@@ -7,11 +7,14 @@ It seems something similar happens to Chrome, too;
   See:; https://github.com/voidlabs/mosaico/issues/85
 So we broadened the application of this hack to include Chrome.
 */
-@media screen and (min-color-index:0) and (-webkit-min-device-pixel-ratio:0) { @media {
-  #main-wysiwyg-area table:not(.img-wysiwyg), #main-wysiwyg-area .selected table:not(.img-wysiwyg):hover {
-    position: relative;
-  }
-  #main-wysiwyg-area table:not(.img-wysiwyg):hover, #main-wysiwyg-area .selected table:not(.img-wysiwyg) {
-    position: static;
-  }
-}}
+@media screen and (min-color-index: 0) and (-webkit-min-device-pixel-ratio: 0) {
+    @media screen {
+        #main-wysiwyg-area table:not(.img-wysiwyg), #main-wysiwyg-area .selected table:not(.img-wysiwyg):hover {
+            position: relative;
+        }
+
+        #main-wysiwyg-area table:not(.img-wysiwyg):hover, #main-wysiwyg-area .selected table:not(.img-wysiwyg) {
+            position: static;
+        }
+    }
+}
