@@ -90,7 +90,7 @@ module.exports = function(grunt) {
             fullPaths: false,
             standalone: 'Mosaico'
           },
-          transform: ['uglifyify'],
+          transform: [],
           cacheFile: 'build/main-incremental.bin',
         },
         files: {
