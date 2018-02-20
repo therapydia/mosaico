@@ -38,7 +38,8 @@ module.exports = function(grunt) {
       css: {
         files: {
           "build/mosaico.css": "src/css/app_standalone.less",
-          "build/mosaico-material.css": "src/css/app_standalone_material.less"
+          "build/mosaico-material.css": "src/css/app_standalone_material.less",
+          "build/mosaico-therapydia.css": "src/css/app_therapydia.less",
         }
       }
     },
@@ -63,6 +64,10 @@ module.exports = function(grunt) {
       material: {
         src: 'build/mosaico-material.css',
         dest: 'dist/mosaico-material.min.css'
+      },
+      therapydia: {
+        src: 'build/mosaico-therapydia.css',
+        dest: 'dist/mosaico-therapydia.min.css'
       }
     },
 
@@ -85,7 +90,7 @@ module.exports = function(grunt) {
             fullPaths: false,
             standalone: 'Mosaico'
           },
-          transform: ['uglifyify'],
+          transform: [],
           cacheFile: 'build/main-incremental.bin',
         },
         files: {

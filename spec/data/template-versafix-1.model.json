@@ -1,39 +1,7 @@
 {
   "type": "template",
   "customStyle": false,
-  "preheaderVisible": true,
   "titleText": "TITLE",
-  "preheaderBlock": {
-    "type": "preheaderBlock",
-    "customStyle": false,
-    "id": "",
-    "backgroundColor": null,
-    "preheaderText": "",
-    "linkStyle": {
-      "type": "linkStyle",
-      "face": null,
-      "color": null,
-      "size": null,
-      "decoration": null
-    },
-    "preheaderLinkOption": "[unsubscribe_link]",
-    "longTextStyle": {
-      "type": "longTextStyle",
-      "face": null,
-      "color": null,
-      "size": null,
-      "linksColor": null
-    },
-    "unsubscribeText": "Unsubscribe",
-    "webversionText": "View in your browser"
-  },
-  "sponsor": {
-    "type": "sponsor",
-    "visible": true,
-    "src": "img/sponsor.gif",
-    "url": "",
-    "alt": "sponsor"
-  },
   "footerBlock": {
     "type": "footerBlock",
     "customStyle": false,
@@ -75,7 +43,7 @@
       "linkStyle": {
         "type": "linkStyle",
         "face": "Arial, Helvetica, sans-serif",
-        "color": "#ffffff",
+        "color": null,
         "size": "13",
         "decoration": "underline"
       }
